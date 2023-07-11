@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://238ib6s7y7ol"]
+
+[ext_resource type="Script" path="res://code/world.gd" id="1_v3ty0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s2ome"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_828nq"]
+sky_material = SubResource("ProceduralSkyMaterial_s2ome")
+
+[sub_resource type="Environment" id="Environment_66u83"]
+background_mode = 2
+sky = SubResource("Sky_828nq")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node"]
+script = ExtResource("1_v3ty0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_66u83")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 9.90648, 0)
+
+[node name="spawners" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 9.90648, 0)
+
+[node name="map_point" type="Node3D" parent="spawners"]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, -1, 0, 1, 1.19249e-08, 0, -1.18134e-07, -9.90648)
+
+[node name="card_point1" type="Node3D" parent="spawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.84012, -1.19249e-07, -10)

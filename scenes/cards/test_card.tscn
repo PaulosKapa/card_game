@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://eoi3vw270usl"]
+
+[ext_resource type="Script" path="res://code/test_card.gd" id="1_6p6gg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e4vxf"]
+size = Vector3(0.113, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2sqae"]
+
+[node name="Area3d" type="Area3D"]
+script = ExtResource("1_6p6gg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_e4vxf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_2sqae")
+skeleton = NodePath("../CollisionShape3D")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
