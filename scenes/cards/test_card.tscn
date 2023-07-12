@@ -7,7 +7,7 @@ size = Vector3(0.113, 1, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2sqae"]
 
-[node name="Area3d" type="Area3D"]
+[node name="card" type="StaticBody3D"]
 script = ExtResource("1_6p6gg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -17,5 +17,3 @@ shape = SubResource("BoxShape3D_e4vxf")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_2sqae")
 skeleton = NodePath("../CollisionShape3D")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]
