@@ -6,13 +6,12 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6kn6a"]
 
-[node name="character" type="Node3D"]
+[node name="character" type="StaticBody3D"]
 script = ExtResource("1_4u5ww")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_xb1ig")
+skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6kn6a")

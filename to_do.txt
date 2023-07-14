@@ -1,10 +1,11 @@
-1. add p2p multiplayer -set @rpc and peer_id
+1. add p2p multiplayer -turns
 2. save data -done?
 3. make a card deck - done
 4. make character with diefferent attributes (ranged, tanks etc..)
 5. add weapons and equipement
 6. add coins and a shop
 7. add trading cards between players
+8. health
 
 	
 

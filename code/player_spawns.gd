@@ -1,5 +1,10 @@
 extends Node3D
 
+var att = 0
+var def = 0
+var ref = 0
+var acc = 0
+var hp = 0
 var perform_raycast = false
 #make a list with all the cards
 var cards = [Global.card1]
@@ -12,7 +17,9 @@ var initial_hand = []
 var card_index = null
 var end_turn = true
 var otherPlayerID = -1
-
+var health = 100
+var attack = false
+var play = true
 @onready var card_spawners = [$card_spawner1,$card_spawner2,$card_spawner3,$card_spawner4,$card_spawner5]
 
 func _enter_tree():
@@ -60,26 +67,21 @@ func end_turn_func():
 	#print(name, ":", end_turn)
 func _physics_process(_delta):
 	if not is_multiplayer_authority(): return
-	
-
-# Get the IDs of the connected players
-
-
+	# Get the IDs of the connected players
 	if otherPlayerID == -1:
 		var connectedPlayers = get_tree().get_multiplayer().get_peers()
 # Find the ID of the other player
 		for playersID in connectedPlayers:
-				
+				play = true
 				otherPlayerID = playersID
 				break
-	
-	
-	raycast_function()
+	if play == true:
+		raycast_function()
 	
 
 func raycast_function():
 	
-	if Input.is_action_pressed("click"):
+	if Input.is_action_just_pressed("click"):
 		perform_raycast = true
 		
 	if perform_raycast == true and end_turn == true:
@@ -97,28 +99,26 @@ func raycast_function():
 		
 		# Make sure the raycast hit something
 		if result.size()>0:
-			#player spawner
+			var parentString = str(result.get("collider").get_parent())
+			var startIndex = parentString.find(":")
+			var playerID = parentString.substr(0, startIndex)
+			#player spawner, only when the player has clicked a card firs
 			#print(result.get("collider"))
 			if str(result.get("collider")).find("spawner")!=-1:
+				attack = false
 				#get the id of the selected card
 				match card_id:
 					null:
 						pass
 					_:
 						#get the parent of the spawner (the id of the player)
-						var parentString = str(result.get("collider").get_parent())
-						var startIndex = parentString.find(":")
-						var playerID = parentString.substr(0, startIndex)
+						
 						#if the spawner doesnt have children and the spawners are owned by the player
 						if result.get("collider").get_child_count() == 2 and playerID == str(name):
 							#instance the character from the selected card
-							var character = chars[card_id].instantiate()
+							
 							#add the character to the spawner
-							rpc_id(int(playerID), "add_char", result.get("collider"), character)
-#							if playerID == str(1):
-#								rpc_id(otherPlayerID, "add_char", result.get("collider"), character)
-#							else:
-#								rpc_id(1, "add_char", result.get("collider"), character)
+							rpc("add_char", str(result.get("collider")), card_id)
 							card_id = null
 							#delete the index from the initial_hand
 							initial_hand.remove_at(card_index)
@@ -126,13 +126,50 @@ func raycast_function():
 							#delete the selected card
 							selected_card.queue_free()
 							selected_card = ""
-							end_turn_func.rpc()
-							if playerID == str(1):
-								rpc_id(otherPlayerID, "end_turn_func")
-							else:
-								rpc_id(1, "end_turn_func")
+#							end_turn_func.rpc()
+#							if playerID == str(1):
+#								rpc_id(otherPlayerID, "end_turn_func")
+#							else:
+#								rpc_id(1, "end_turn_func")
+			#attacking
+			elif str(result.get("collider")).find("character")!=-1 and attack == false:
+				attack = true
+				hp = result.get("collider").get_health()
+				att = result.get("collider").get_attack()
+				def = result.get("collider").get_defend()
+				ref = result.get("collider").get_reflexes()
+				acc = result.get("collider").get_accucary()
+				
+			elif str(result.get("collider")).find("character")!=-1 and attack == true:
+				print(attack, 1)
+				#make a new ray to check if the player will click on another base
+				var ray_length1 = 1000
+				var mouse_pos1 = get_viewport().get_mouse_position()
+				var camera1 = $Camera3D
+				var space_state1 = get_world_3d().get_direct_space_state()
+				var params1 = PhysicsRayQueryParameters3D.new()
+				params1.from = camera.project_ray_origin(mouse_pos)
+				params1.to = params1.from + camera.project_ray_normal(mouse_pos) * ray_length
+				# Send the raycast into the scene and react if it collided with something
+				var result1 = space_state1.intersect_ray(params1)
+				#check if the player spawns on en enemy node
+				if str(result1.get("collider")).find("character")!=-1:
+					if playerID != str(name):
+						
+						#receive_damage.rpc_id(result1.get("collider").get_multiplayer_authority())
+						result.get("collider").get_health()
+						result.get("collider").get_attack()
+						result.get("collider").get_defend()
+						result.get("collider").get_reflexes()
+						result.get("collider").get_accucary()
+						attack = false
+					else:
+						attack = false
+				else:
+						attack = false
 			#card
 			elif str(result.get("collider")).find("card")!=-1:
+				attack = false
 				#get the id of the card
 				card_id = result.get("collider").get_card_id()
 				#save the card, to be deleted later
@@ -142,13 +179,17 @@ func raycast_function():
 				
 			#deck
 			elif str(result.get("collider")).find("deck")!=-1:
+				attack = false
 				add_card()
 		perform_raycast = false
 @rpc("call_local")
-func add_char(result, character):
-	result.add_child(character)
-	print(name, " spawned ", character)
+func add_char(result, card_id):
+	var character = chars[card_id].instantiate()	
+	get_node(result).add_child(character)
 
+@rpc("any_peer")
+func receive_damage():
+	queue_free()
 
 func _input(_event):
 	if not is_multiplayer_authority(): return

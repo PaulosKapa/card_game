@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2vdllxtfo6gm"]
+
+[ext_resource type="Script" path="res://code/store.gd" id="1_kiujq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xhch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kxd38"]
+
+[node name="store" type="Node3D"]
+script = ExtResource("1_kiujq")
+
+[node name="characters" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="characters"]
+mesh = SubResource("BoxMesh_0xhch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="characters"]
+shape = SubResource("BoxShape3D_kxd38")
+
+[node name="items" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="items"]
+mesh = SubResource("BoxMesh_0xhch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="items"]
+shape = SubResource("BoxShape3D_kxd38")
+
+[node name="both" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="both"]
+mesh = SubResource("BoxMesh_0xhch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="both"]
+shape = SubResource("BoxShape3D_kxd38")
+
+[node name="close" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="close"]
+mesh = SubResource("BoxMesh_0xhch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="close"]
+shape = SubResource("BoxShape3D_kxd38")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.26566, 0, 0)
+
+[connection signal="input_event" from="characters" to="." method="_on_characters_input_event"]
+[connection signal="input_event" from="items" to="." method="_on_items_input_event"]
+[connection signal="input_event" from="both" to="." method="_on_both_input_event"]
+[connection signal="input_event" from="close" to="." method="_on_close_input_event"]
