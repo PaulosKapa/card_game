@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dt6o73tw8rhlf"]
+[gd_scene load_steps=4 format=3 uid="uid://dt6o73tw8rhlf"]
 
 [ext_resource type="Script" path="res://code/test_map.gd" id="1_xseqg"]
-[ext_resource type="PackedScene" uid="uid://b6imchyuwi832" path="res://scenes/player_spawns.tscn" id="2_3e0s5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kj1fc"]
 
@@ -19,5 +18,3 @@ mesh = SubResource("BoxMesh_kj1fc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_14pow")
-
-[node name="player_spawns" parent="." instance=ExtResource("2_3e0s5")]

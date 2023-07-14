@@ -26,4 +26,3 @@ var map1 = preload("res://scenes/battlefields/test.tscn")
 #cards
 var card1 = preload("res://scenes/cards/test_card.tscn")
 
-

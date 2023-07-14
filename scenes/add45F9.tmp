@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cei7put2xhqh1"]
+
+[ext_resource type="Script" path="res://code/add_items.gd" id="1_f2qq7"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_f2qq7")
+
+[node name="add" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Add"
+
+[node name="name" type="LineEdit" parent="."]
+offset_right = 67.0625
+offset_bottom = 31.0
+placeholder_text = "name"
+
+[node name="class" type="LineEdit" parent="."]
+offset_right = 67.0625
+offset_bottom = 31.0
+placeholder_text = "class"
+
+[node name="location" type="LineEdit" parent="."]
+offset_right = 67.0625
+offset_bottom = 31.0
+placeholder_text = "location"

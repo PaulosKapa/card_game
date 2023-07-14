@@ -1,63 +1,10 @@
-1. add p2p multiplayer
-2. save data
-3. make a card deck
+1. add p2p multiplayer -set @rpc and peer_id
+2. save data -done?
+3. make a card deck - done
 4. make character with diefferent attributes (ranged, tanks etc..)
 5. add weapons and equipement
 6. add coins and a shop
 7. add trading cards between players
 
-1.#see rpc
-extends Node
-const PORT = 9999
-var enet_peer = ENetMultiplayerPeer.new()
-@onready var player = preload("res://player.tscn")
-func _on_button_pressed():
-	#join
-	$Control.hide()
-	enet_peer.create_client($Control/LineEdit.text,PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	multiplayer.peer_connected.connect(add_player)
-
-func _on_button_2_pressed():
-	#host
-	$Control.hide()
-	enet_peer.create_server(PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	add_player(multiplayer.get_unique_id())
-	multiplayer.peer_disconnected.connect(remove_player)
-	upnp_setup()
-func add_player(peer_id):
-	var pl = player.instantiate()
-	pl.name = str(peer_id)
-	add_child(pl)
-func remove_player(peer_id):
-	var pl = get_node_or_null(str(peer_id))
-	if pl:
-		pl.queue_free()
-		
-func upnp_setup():
-	var upnp = UPNP.new()
-	var discover_result = upnp.discover()
-	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, \
-	"UPNP Discover Failed! Error %s" % discover_result)
-
-	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), \
-	"UPNP Invalid Gateway!")
-
-	var map_result = upnp.add_port_mapping(PORT)
-	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, \
-		"UPNP Port Mapping Failed! Error %s" % map_result)
-	
-	print("Success! Join Address: %s" % upnp.query_external_address())
-
---------------------------------------------------------------------
-
-extends Node2D
-
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-	
-func _ready():
-	if not is_multiplayer_authority(): return
 	
 

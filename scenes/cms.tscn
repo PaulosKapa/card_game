@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ijg7c6nbwdt"]
+
+[ext_resource type="Script" path="res://code/add_items.gd" id="1_hrjqe"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hrjqe")
+
+[node name="add" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 109.0
+offset_top = 1.0
+offset_right = 147.0
+offset_bottom = 32.0
+text = "add"
+
+[node name="name" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 35.0
+offset_right = 156.062
+offset_bottom = 66.0
+placeholder_text = "name"
+
+[node name="location" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 89.0
+offset_right = 167.062
+offset_bottom = 120.0
+placeholder_text = "location"
+
+[node name="class" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 170.0
+offset_right = 160.062
+offset_bottom = 201.0
+placeholder_text = "class"
+
+[connection signal="pressed" from="add" to="." method="_on_add_pressed"]

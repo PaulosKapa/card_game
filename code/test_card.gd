@@ -9,3 +9,5 @@ func get_card_id():
 	return card_id
 	
 #get if the chard is a character
+func get_card_is_character():
+	return is_character

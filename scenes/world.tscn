@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://238ib6s7y7ol"]
+[gd_scene load_steps=6 format=3 uid="uid://238ib6s7y7ol"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_v3ty0"]
+[ext_resource type="PackedScene" uid="uid://dt6o73tw8rhlf" path="res://scenes/battlefields/test.tscn" id="3_cthp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s2ome"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -29,7 +30,42 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 9.90648, 0)
 
 [node name="map_point" type="Node3D" parent="spawners"]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, -1, 0, 1, 1.19249e-08, 22.0694, -1.18134e-07, -9.90648)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4, -10)
 
 [node name="map_point2" type="Node3D" parent="spawners"]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, -1, 0, 1, 1.19249e-08, -26.6085, -1.18134e-07, -9.90648)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, -10)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.705729
+anchor_bottom = 0.723765
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 71.0
+offset_right = 307.0
+offset_bottom = 102.0
+text = "join"
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 132.0
+offset_right = 304.0
+offset_bottom = 163.0
+text = "host"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player_spawns.tscn")
+spawn_path = NodePath("../spawners/map_point")
+
+[node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player_spawns.tscn")
+spawn_path = NodePath("../spawners/map_point2")
+
+[node name="Node3D" parent="." instance=ExtResource("3_cthp2")]
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Button2" to="." method="_on_button_2_pressed"]
