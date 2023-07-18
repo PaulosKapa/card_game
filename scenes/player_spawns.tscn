@@ -16,14 +16,14 @@ script = ExtResource("1_238a3")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.907777, 0.419452, 0, -0.419452, 0.907777, 0, 3, 8.285)
 
-[node name="spawner" type="StaticBody3D" parent="."]
+[node name="spawner1" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="spawner"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spawner1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00145996, 0)
 shape = SubResource("BoxShape3D_72ck3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="spawner"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="spawner1"]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 1, 0, -0.322324, 0)
 mesh = SubResource("BoxMesh_mxke5")
 skeleton = NodePath("")
@@ -114,3 +114,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78474, 1.77447, -4.10581)
 
 [node name="card_spawner5" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78474, 1.77447, -7.81062)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.165)
+pixel_size = 0.0705
+text = "asdf"

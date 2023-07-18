@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://13cl7mnon36g"]
+
+[ext_resource type="Script" path="res://code/test_equipement.gd" id="1_27ggx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cufm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0tg35"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_onqhn"]
+material = SubResource("StandardMaterial3D_0tg35")
+
+[node name="card" type="StaticBody3D"]
+script = ExtResource("1_27ggx")
+card_id = 1
+is_character = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_0cufm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_onqhn")

@@ -1,11 +1,14 @@
 1. add p2p multiplayer -turns
 2. save data -done?
 3. make a card deck - done
-4. make character with diefferent attributes (ranged, tanks etc..)
-5. add weapons and equipement
-6. add coins and a shop
+4. make character with diefferent attributes (ranged, tanks etc..) -done
+5. add weapons and equipement - done
+6. add coins and a shop - issue 1
 7. add trading cards between players
-8. health
+8. health - issue 1
+
+issue 1: 
+	can't call any peer functions inside a call local function
 
 	
 
