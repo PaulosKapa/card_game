@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://iwgtnvqnmw5j"]
+
+[ext_resource type="PackedScene" uid="uid://ct8w4ikb5gol" path="res://models/forest.gltf" id="1_qesn4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_14pow"]
+size = Vector3(10, 1, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="forest" parent="StaticBody3D" instance=ExtResource("1_qesn4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_14pow")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5extcq8s7c82"]
+
+[ext_resource type="Script" path="res://code/card_child.gd" id="1_oam3q"]
+[ext_resource type="Texture2D" uid="uid://cybx8lian1o2x" path="res://images/flesh_cube.png" id="2_e6ujv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qq5da"]
+size = Vector3(0.08, 3.82, 2.185)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mkf6y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfffh"]
+albedo_texture = ExtResource("2_e6ujv")
+emission_enabled = true
+emission_texture = ExtResource("2_e6ujv")
+
+[node name="card" type="StaticBody3D"]
+script = ExtResource("1_oam3q")
+card_id = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qq5da")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.72083e-08, -1, 0, -4.72083e-08, 1.91069e-15, -1.92, 1.08, -4.37114e-08, -8.39259e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_mkf6y")
+surface_material_override/0 = SubResource("StandardMaterial3D_jfffh")
+
+[node name="attack" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -0.497247, -0.15607)
+text = "sdfa"
+
+[node name="defence" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -0.696872, 0.0439298)
+text = "sdfa"
+
+[node name="accucary" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -0.885608, 0.0439298)
+text = "sdfa"
+
+[node name="reflexes" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -1.05844, 0.0439298)
+text = "sdfa"
+
+[node name="health" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -1.25102, -0.123961)
+text = "sdfa"
+
+[node name="class" type="Label3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -0.103513, -1.43866, -0.22272)
+text = "sdfa"

@@ -1,39 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://238ib6s7y7ol"]
+[gd_scene load_steps=3 format=3 uid="uid://238ib6s7y7ol"]
 
 [ext_resource type="Script" path="res://code/world.gd" id="1_v3ty0"]
-[ext_resource type="PackedScene" uid="uid://dt6o73tw8rhlf" path="res://scenes/battlefields/test.tscn" id="3_cthp2"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s2ome"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_828nq"]
-sky_material = SubResource("ProceduralSkyMaterial_s2ome")
-
-[sub_resource type="Environment" id="Environment_66u83"]
-background_mode = 2
-sky = SubResource("Sky_828nq")
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="Environment" uid="uid://duolnhfelvmq3" path="res://enviroment/night.tres" id="2_js5ht"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_v3ty0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_66u83")
+environment = ExtResource("2_js5ht")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 11.583, 0)
+light_energy = 0.354
 shadow_enabled = true
+sky_mode = 2
 
 [node name="spawners" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 9.90648, 0)
 
 [node name="map_point" type="Node3D" parent="spawners"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4, -10)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -4, -9.91884)
 
 [node name="map_point2" type="Node3D" parent="spawners"]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, -10)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 4, -9.91888)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -57,6 +46,14 @@ offset_right = 304.0
 offset_bottom = 163.0
 text = "host"
 
+[node name="Button3" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 267.0
+offset_top = 201.0
+offset_right = 310.0
+offset_bottom = 232.0
+text = "shop"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player_spawns.tscn")
 spawn_path = NodePath("../spawners/map_point")
@@ -65,7 +62,11 @@ spawn_path = NodePath("../spawners/map_point")
 _spawnable_scenes = PackedStringArray("res://scenes/player_spawns.tscn")
 spawn_path = NodePath("../spawners/map_point2")
 
-[node name="Node3D" parent="." instance=ExtResource("3_cthp2")]
+[node name="map_spawner" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Control/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="spawned" from="MultiplayerSpawner2" to="." method="_on_multiplayer_spawner_2_spawned"]

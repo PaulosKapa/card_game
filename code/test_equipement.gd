@@ -1,4 +1,4 @@
-extends card
+extends card_class
 class_name equipement
 @export var strength = 10
 @export var defend = 10

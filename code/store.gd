@@ -78,3 +78,4 @@ func _on_both_input_event(camera, event, position, normal, shape_idx):
 func _on_close_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		save()
+		get_tree().change_scene_to_file("res://scenes/world.tscn")

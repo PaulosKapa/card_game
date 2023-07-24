@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-class_name card
+class_name card_class
 @export var card_id = 0
 @export var is_character = true
 

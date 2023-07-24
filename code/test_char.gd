@@ -1,5 +1,6 @@
 extends StaticBody3D
-
+class_name character
+#0 - 100
 @export var character_id = 0 
 @export var attack = 10
 @export var defend = 10
